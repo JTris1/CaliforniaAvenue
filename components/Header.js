@@ -5,17 +5,20 @@ import AccountPane from './AccountPane';
 function Header() {
     const [accPaneOpen, setAccPaneOpen] = useState(false);
 
+    const header_x_pad_marg = '10'
+
     return (
         <>
-            <header className='flex justify-between items-center px-10 py-5 bg-blue-300 box-border' id='navbar'>
-                <span className="material-symbols-outlined invisible">account_circle</span>
+            <header className={`flex justify-center items-center px-${header_x_pad_marg} py-5 bg-blue-300 box-border relative`} id='navbar'>
+                {/* <span className="material-symbols-outlined invisible">account_circle</span> */}
                 <Image src="/logo-light.png" height={64} width={64} alt="Logo" className='h-auto' />
-                <span className="material-symbols-outlined h-full text-5xl text-white cursor-pointer"
+                <div className={`absolute right-0 h-full mr-${header_x_pad_marg} flex items-center`}
                     onMouseOver={() => setAccPaneOpen(true)}
-                    onMouseLeave={() => setAccPaneOpen(false)}
-                >account_circle</span>
+                    onMouseLeave={() => setAccPaneOpen(false)}>
+                    <span className="material-symbols-outlined text-5xl text-white cursor-pointer">account_circle</span>
+                </div>
             </header>
-            {accPaneOpen ? <AccountPane /> : undefined}
+            {accPaneOpen ? <AccountPane setAccPaneOpen={setAccPaneOpen} /> : undefined}
         </>
     )
 }

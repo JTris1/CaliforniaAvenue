@@ -1,8 +1,11 @@
 import React from 'react'
 
-function AccountPane() {
+function AccountPane({ setAccPaneOpen }) {
     return (
-        <div className='w-[325px] h-[400px] absolute right-0 flex flex-col justify-between items-end bg-blue-300 text-white p-7'>
+        <div className='w-[325px] h-[400px] absolute right-0 flex flex-col justify-between items-end bg-blue-300 text-white p-7 drop-shadow-xl'
+            onMouseOver={() => setAccPaneOpen(true)}
+            onMouseLeave={() => setAccPaneOpen(false)}
+        >
             <div className='flex flex-col'>
                 <h1 className='font-extrabold text-3xl underline underline-offset-4 mb-5'>Hello, Example!</h1>
                 <ul className='text-right'>
