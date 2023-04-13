@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-function ZipCodeSearch() {
+function ZipCodeSearch({ setSearchInput }) {
     const [codes] = useState(['90706', '93905', '92056', '91801', '90210', '91766', '90034', '92083', '95112']);
     const [placeholder, setPlaceholder] = useState([]);
     const [currentCode, setCurrentCode] = useState(generateCode());
@@ -48,7 +48,11 @@ function ZipCodeSearch() {
     }, [])
 
     return (
-        <input className={`border-solid border-4 border-blue-500 rounded-xl w-1/2 h-14 text-2xl py-2 px-4 focus:outline-none`} id='zipcode-home-search' type="text" name="zipcode" placeholder={placeholder} />
+        <input className={`border-solid border-4 border-blue-500 rounded-xl w-1/2 h-14 text-2xl py-2 px-4 focus:outline-none`} id='zipcode-home-search'
+            type="text" name="zipcode"
+            placeholder={placeholder}
+            onInput={(e) => setSearchInput(e.target.value)}
+        />
     )
 }
 
