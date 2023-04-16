@@ -2,7 +2,7 @@ import React from 'react'
 
 function AccountPane({ setAccPaneOpen }) {
     return (
-        <div className='w-[325px] h-[400px] absolute right-0 flex flex-col justify-between items-end bg-blue-300 text-white p-7 drop-shadow-xl'
+        <div className='w-[325px] h-[400px] absolute right-0 flex flex-col justify-between items-end bg-blue-300 text-white p-7 drop-shadow-xl rounded-bl-md'
             onMouseOver={() => setAccPaneOpen(true)}
             onMouseLeave={() => setAccPaneOpen(false)}
         >
