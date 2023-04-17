@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --foreground-hex: #000000;
+  --foreground-hex: #111111;
   --background-hex: #FEFCFB;
 }
 
@@ -16,14 +16,14 @@
 }
 
 body {
-  color: rgb(var(--foreground-hex));
+  color: #111111;
   background: #FEFCFB;
 }
 
 /* Material Icons */
 .material-symbols-outlined {
   font-variation-settings:
-  'FILL' 0,
+  'FILL' 1,
   'wght' 400,
   'GRAD' 0,
   'opsz' 48

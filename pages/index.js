@@ -10,6 +10,8 @@ const lato = Lato({ weight: ['400', '700', '900'], subsets: ['latin'] });
 
 export default function Home() {
   const [searchInput, setSearchInput] = useState(null);
+  const [searchStatus, setSearchStatus] = useState(null);
+  const router = useRouter();
 
   function sumbitZipCode(e) {
     // This does NOT submit a form, or query the API.
@@ -18,8 +20,13 @@ export default function Home() {
       e.preventDefault();
     }
 
-
-
+    if (searchInput.length === 5 && searchInput[0] == '9') {
+      setSearchStatus('OK');
+      router.push(`/listings?zipcode=${searchInput}`);
+    }
+    else {
+      setSearchStatus('BAD_ZIP_CODE');
+    }
   }
 
   return (
@@ -32,14 +39,26 @@ export default function Home() {
           <h1 className='font-bold text-5xl mb-3'>Ready to find your dream property?</h1>
           <h1 className='font-bold text-5xl'>Start by entering your Zip Code below.</h1>
         </div>
-        <div className='flex justify-center items-center w-2/3'>
-          <form action="" method="get" className='w-full flex justify-center items-center'
+        <div className='flex flex-col justify-center items-center w-2/5'>
+          <form action="" method="get" className='w-full flex justify-center flex-col'
             onSubmit={(e) => sumbitZipCode(e)}
           >
-            <ZipCodeSearch setSearchInput={setSearchInput} />
-            <button className='bg-blue-500 rounded-full w-10 h-10 -ml-14 text-white font-black' onClick={() => sumbitZipCode()}>
-              <span className="material-symbols-outlined text-3xl">arrow_forward</span>
-            </button>
+            <div className='flex justify-center items-center w-full'>
+              <ZipCodeSearch setSearchInput={setSearchInput} />
+              <button className='bg-blue-500 rounded-full w-10 h-10 -ml-14 text-white font-black' onClick={() => sumbitZipCode()}>
+                <span className="material-symbols-outlined text-3xl">arrow_forward</span>
+              </button>
+            </div>
+            {searchStatus === "BAD_ZIP_CODE" ?
+              (
+                <div className='flex items-center mt-5'>
+                  <span className='material-symbols-outlined text-3xl text-red-500 rounded-full mr-4'>error</span>
+                  <p className='w-full text-red-500 font-bold'>Not a valid Zip Code</p>
+                </div>
+              )
+              :
+              undefined}
+
           </form>
 
         </div>

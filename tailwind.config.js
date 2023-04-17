@@ -1,4 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+
+const colors = require('tailwindcss/colors');
+
 module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
@@ -11,7 +14,8 @@ module.exports = {
       'blue-300': '#1282A2',
       'blue-500': '#034078',
       'blue-700': '#001F54',
-      'blue-900': '#0A1128'
+      'blue-900': '#0A1128',
+      'red': colors.red
     },
     extend: {
       backgroundImage: {

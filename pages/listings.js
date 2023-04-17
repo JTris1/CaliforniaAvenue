@@ -33,9 +33,11 @@ function Listings() {
     useEffect(() => {
         async function fetch() {
             if (zipcode) {
-                const req = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${zipcode}&key=AIzaSyAVZNv2F1n9Gb4dzXASG67q3KW_IxQx62A`);
+                const req = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${zipcode}&components=country:US&key=AIzaSyAVZNv2F1n9Gb4dzXASG67q3KW_IxQx62A`);
                 console.log(req.data);
-                setReqLatLng(req.data.results[0].geometry.location);
+                if (req.data.status === "OK") {
+                    setReqLatLng(req.data.results[0].geometry.location);
+                }
             }
         }
         fetch();
@@ -47,7 +49,7 @@ function Listings() {
     return (
         <>
             <Head>
-                <title>Listings for {zipcode}</title>
+                <title>Listings for {zipcode || '...'} | Cali Ave.</title>
             </Head>
             <div className='flex w-full h-full'>
                 {isLoaded ?
