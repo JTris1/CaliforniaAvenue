@@ -32,7 +32,7 @@ function Carousel({ slideCount }) {
         <>
             <div className='bg-white w-full h-96 mt-32 rounded-2xl flex justify-center'>
                 <Swiper
-                    modules={[Navigation]}
+                    modules={[Navigation, Autoplay]}
                     slidesPerView={1}
                     navigation
                     centeredSlides={true}
