@@ -4,18 +4,37 @@ import { Navigation, Autoplay } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import CarouselItem from './CarouselItem';
+import axios from 'axios';
 
-function Carousel({ slides }) {
-    const [slideObjs, setSlideObjs] = useState([]);
+function Carousel({ slideCount }) {
+    const [slides, setSlides] = useState([]);
+
+    // useEffect(() => {
+    //     async function getProperties() {
+    //         const limit = slideCount;
+    //         const properties = await axios.get(`https://vishalhelloworld-375613.ue.r.appspot.com/propertyEnquiry?zip_code=90210&limit=${limit}`);
+    //         console.log(properties.data);
+
+    //         properties.data.map((property) => {
+    //             setSlides(() => [...slides, (
+    //                 <SwiperSlide key={property.latitude + property.longitude} style={{ display: 'flex' }} className='justify-center items-center'>
+    //                     <CarouselItem imgSrc={'/example-house.jpg'} price={250000} city={'Indianapolis'} state={'IN'} bedrooms={3} baths={2} />
+    //                 </SwiperSlide>
+    //             )]);
+    //         });
+
+    //     }
+    //     getProperties();
+
+    // }, [slideCount])
 
     return (
         <>
-            <div className='bg-white w-9/12 h-96 mt-32 rounded-2xl flex justify-center'>
+            <div className='bg-white w-full h-96 mt-32 rounded-2xl flex justify-center'>
                 <Swiper
-                    modules={[Navigation, Autoplay]}
+                    modules={[Navigation]}
                     slidesPerView={1}
                     navigation
-                    onSlideChange={() => console.log('slide change')}
                     centeredSlides={true}
                     loop={true}
                     autoplay={{
@@ -40,6 +59,7 @@ function Carousel({ slides }) {
                     <SwiperSlide style={{ display: 'flex' }} className='justify-center items-center'>
                         <CarouselItem imgSrc={'/example-house.jpg'} price={250000} city={'Indianapolis'} state={'IN'} bedrooms={3} baths={2} />
                     </SwiperSlide>
+                    {slides.length === 0 ? <></> : slides}
                 </Swiper>
             </div>
         </>

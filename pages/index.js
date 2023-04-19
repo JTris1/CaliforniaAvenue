@@ -1,7 +1,6 @@
 import { Lato } from 'next/font/google'
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import Script from 'next/script';
 import { useEffect, useState } from 'react';
 import Carousel from '~/components/Carousel';
 import ZipCodeSearch from '~/components/ZipCodeSearch';
@@ -34,8 +33,8 @@ export default function Home() {
       <Head>
         <title>California Avenue</title>
       </Head>
-      <main className={`flex flex-col min-w-[1280px] max-w-[1920px] items-center p-16 ${lato.className}`}>
-        <div className='flex flex-col items-center my-32'>
+      <main className={`flex flex-col sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl items-center p-16 ${lato.className}`}>
+        <div className='flex flex-col items-center my-20'>
           <h1 className='font-bold text-5xl mb-3'>Ready to find your dream property?</h1>
           <h1 className='font-bold text-5xl'>Start by entering your Zip Code below.</h1>
         </div>
@@ -58,11 +57,10 @@ export default function Home() {
               )
               :
               undefined}
-
           </form>
 
         </div>
-        <Carousel slides={3} />
+        <Carousel slideCount={3} />
       </main>
     </>
 

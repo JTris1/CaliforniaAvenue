@@ -9,8 +9,8 @@ function CarouselItem({ imgSrc, price, city, state, bedrooms, baths }) {
     });
 
     return (
-        <div className='flex w-2/3 h-4/5 drop-shadow-xl'>
-            <div className='w-5/12 h-full bg-white rounded-s-xl relative'>
+        <div className='flex flex-col items-center w-2/3 h-4/5 drop-shadow-xl lg:flex-row xl:flex-row 2xl:flex-row'>
+            <div className='w-7/12 h-full bg-white rounded-t-xl relative'>
                 <Image src={imgSrc} alt="House" fill={true} sizes="450px" className='object-cover rounded-s-xl' />
             </div>
             <div className='w-7/12 h-full flex flex-col justify-between items-center bg-blue-500 rounded-e-xl p-8'>

@@ -49,7 +49,7 @@ function Listings() {
     return (
         <>
             <Head>
-                <title>Listings for {zipcode || '...'} | Cali Ave.</title>
+                <title>{`Listings for ${zipcode || '...'} | Cali Ave.`}</title>
             </Head>
             <div className='flex w-full h-full'>
                 {isLoaded ?

@@ -17,6 +17,9 @@ module.exports = {
       'blue-900': '#0A1128',
       'red': colors.red
     },
+    // screens: {
+    // 
+    // }
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
