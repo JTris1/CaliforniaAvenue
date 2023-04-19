@@ -15,7 +15,7 @@ function Header() {
                 <div className={`absolute right-0 h-full w-16 mr-10 flex items-center justify-center cursor-pointer`}
                     onMouseOver={() => setAccPaneOpen(true)}
                     onMouseLeave={() => setAccPaneOpen(false)}>
-                    <span className="material-symbols-outlined text-5xl text-white">account_circle</span>
+                    <span className="material-symbols-outlined text-5xl text-white select-none">account_circle</span>
                 </div>
             </header>
             {accPaneOpen ? <AccountPane setAccPaneOpen={setAccPaneOpen} /> : undefined}
