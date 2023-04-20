@@ -15,17 +15,15 @@ module.exports = {
       'blue-500': '#034078',
       'blue-700': '#001F54',
       'blue-900': '#0A1128',
-      'red': colors.red
+      'red': colors.red,
+      'gray': colors.gray
     },
-    // screens: {
-    // 
-    // }
     extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      },
+      // backgroundImage: {
+      //   'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+      //   'gradient-conic':
+      //     'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      // },
     },
   },
   plugins: [],
