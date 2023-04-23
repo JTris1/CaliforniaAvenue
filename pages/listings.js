@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router'
-import { GoogleMap, useJsApiLoader, } from '@react-google-maps/api';
+import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
+import { Loader } from '@googlemaps/js-api-loader';
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import Script from 'next/script';
 import axios from 'axios';
@@ -12,6 +13,8 @@ function Listings() {
     const { zipcode } = router.query;
     const [listings, setListings] = useState(null);
     const [listitems, setListitems] = useState(null);
+    const [markers, setMarkers] = useState([]);
+    const [bounds, setBounds] = useState(null);
 
 
     useEffect(() => {
@@ -40,7 +43,13 @@ function Listings() {
 
     useEffect(() => {
         if (listings) {
+            let markers = [];
+            let bounds = [];
             const objs = listings.map((l) => {
+                markers.push(<Marker key={l.latitude + l.longitude} position={{ lat: l.latitude, lng: l.longitude }} />);
+                bounds.push({ lat: l.latitude, lng: l.longitude });
+
+
                 return (
                     <ListItem
                         key={l.latitude + l.longitude}
@@ -49,10 +58,14 @@ function Listings() {
                         bathrooms={l.bathrooms}
                         description={l.description}
                         floor_size_sq_ft={l.floor_size_sq_ft}
-                        latlng={{ lat: l.latitude, lon: l.longitude }}
+                        latlng={{ lat: parseFloat(l.latitude), lng: parseFloat(l.longitude) }}
                         locality={l.locality}
+                        panTo={panTo}
                     />)
             });
+
+            setMarkers(markers);
+            setBounds(bounds);
 
             setListitems(objs);
         }
@@ -65,24 +78,30 @@ function Listings() {
 
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
-        googleMapsApiKey: 'AIzaSyAVZNv2F1n9Gb4dzXASG67q3KW_IxQx62A',
+        googleMapsApiKey: process.env.NEXT_PUBLIC_MAPS_API_KEY,
         mapIds: ['ccbe9bc2fe9491c6']
     });
 
-    const onLoad = useCallback((map) => {
-
+    const onLoad = useCallback(async (map) => {
+        setMap(map);
     }, []);
 
     const onUnmount = useCallback((map) => {
         setMap(null);
     }, []);
 
+
+    function panTo(lat, lng) {
+        map.panTo({ lat: lat, lng: lng });
+        map.setZoom(18);
+    }
+
+
     // Convert zipcode to coordinates
     useEffect(() => {
         async function fetch() {
             if (zipcode) {
-                const req = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${zipcode}&components=country:US&key=AIzaSyAVZNv2F1n9Gb4dzXASG67q3KW_IxQx62A`);
-                console.log(req.data);
+                const req = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${zipcode}&components=country:US&key=${process.env.NEXT_PUBLIC_MAPS_API_KEY}`);
                 if (req.data.status === "OK") {
                     setReqLatLng(req.data.results[0].geometry.location);
                 }
@@ -90,6 +109,24 @@ function Listings() {
         }
         fetch();
     }, [zipcode])
+
+    useEffect(() => {
+        async function setBounds() {
+            if (bounds) {
+                const { LatLngBounds } = await google.maps.importLibrary("core");
+                const mapBounds = new LatLngBounds;
+                bounds.forEach((i) => {
+                    mapBounds.extend(i);
+                })
+
+                if (map) {
+                    map.fitBounds(mapBounds);
+                }
+            }
+        }
+
+        setBounds();
+    }, [bounds])
 
     //// END GOOGLE MAP
 
@@ -101,15 +138,20 @@ function Listings() {
             </Head>
             <div className='flex w-full h-full'>
                 {isLoaded ?
-                    <GoogleMap mapContainerClassName='h-full w-[50%]' center={reqLatLng} zoom={12} onLoad={onLoad} onUnmount={onUnmount}></GoogleMap>
+                    <GoogleMap mapContainerClassName='h-full w-1/3 g-map' center={reqLatLng} zoom={12} onLoad={onLoad} onUnmount={onUnmount} >
+                        {markers}
+                    </GoogleMap>
                     : <></>
                 }
-                <div className='flex flex-col items-center w-[50%] p-12'>
-                    <h1 className='font-bold text-4xl'>Results for <span className='font-black'>{zipcode}</span></h1>
+                <div className='w-2/3 px-20 py-10'>
+                    <div className='flex flex-col items-center rounded-xl w-full h-full bg-gray-100 p-10'>
+                        <h1 className='font-bold text-4xl mb-10'>Results for <span className='font-black'>{zipcode}</span></h1>
 
-                    <div className='w-full'>
-                        {listitems}
+                        <div className='w-full'>
+                            {listitems}
+                        </div>
                     </div>
+
                 </div>
 
             </div>
