@@ -15,6 +15,7 @@
     "cookies-next": "^2.1.1",
     "eslint": "8.38.0",
     "eslint-config-next": "13.3.0",
+    "lodash-es": "^4.17.21",
     "lord-icon-element": "^4.1.1",
     "lottie-web": "^5.11.0",
     "ms": "^2.1.3",

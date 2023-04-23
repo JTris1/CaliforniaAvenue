@@ -60,12 +60,12 @@ function Register() {
                 <div id="form" className='w-2/3 flex flex-col items-center'>
                     <h1 className='font-bold text-3xl m-20'>{"Let's get you signed up!"}</h1>
                     <form method='post' action='' className='flex flex-col w-full max-w-screen-sm' onSubmit={(e) => handleSubmit(e)}>
-                        <TextInput name={'name'} label={true} label_text={'Name'} useInput={[inputs, setInputs]} />
-                        <TextInput type={'email'} name={'email_address'} label={true} label_text={'Email Address'} useInput={[inputs, setInputs]} />
-                        <TextInput type={'tel'} name={'phone_number'} label={true} label_text={'Phone Number'} useInput={[inputs, setInputs]} />
-                        <TextInput type={'text'} name={'zip_code'} label={true} label_text={'Zip Code'} useInput={[inputs, setInputs]} />
-                        <TextInput type={'password'} name={'password'} label={true} label_text={'Password'} useInput={[inputs, setInputs]} />
-                        <TextInput type={'password'} name={'repassword'} label={true} label_text={'Confirm Password'} useInput={[inputs, setInputs]} />
+                        <TextInput name={'name'} label={true} label_text={'Name'} useParentInput={[inputs, setInputs]} />
+                        <TextInput type={'email'} name={'email_address'} label={true} label_text={'Email Address'} useParentInput={[inputs, setInputs]} />
+                        <TextInput type={'tel'} name={'phone_number'} label={true} label_text={'Phone Number'} useParentInput={[inputs, setInputs]} />
+                        <TextInput type={'text'} name={'zip_code'} label={true} label_text={'Zip Code'} useParentInput={[inputs, setInputs]} />
+                        <TextInput type={'password'} name={'password'} label={true} label_text={'Password'} useParentInput={[inputs, setInputs]} />
+                        <TextInput type={'password'} name={'repassword'} label={true} label_text={'Confirm Password'} useParentInput={[inputs, setInputs]} />
 
                         <input type="submit" value="Sign Up" className='self-end bg-blue-500 text-white rounded-xl h-12 text-lg mb-5 py-2 px-4 cursor-pointer' />
                     </form>

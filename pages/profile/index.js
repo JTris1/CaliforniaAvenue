@@ -5,20 +5,51 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import InfoPanel from '~/components/InfoPanel';
 import { hasCookie } from 'cookies-next';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper';
-import 'swiper/css'
-import 'swiper/css/navigation'
+import SavedListings from '~/components/SavedListings';
+import TextInput from '~/components/TextInput';
+import { isEqual } from 'lodash-es';
+import useUpdateUser from '~/hooks/useUpdateUser';
+
+
+// TODO: Dynamically pull in saved listings from user data
 
 
 function Profile() {
     const [data] = useUserData();
-    console.log(data);
+    const updateUser = useUpdateUser();
     const [localData, setLocalData] = useState(null);
-
+    const [inputs, setInputs] = useState({});
+    const [allowSubmit, setAllowSubmit] = useState(false);
+    const [updateSuccess, setUpdateSuccess] = useState(null);
 
     const router = useRouter();
 
+    // Create a copy of user data whenever it is loaded from the DB
+    useEffect(() => {
+        if (localData) {
+            setInputs({ ...localData });
+        }
+    }, [localData])
+
+    // Compare user data to input data to see if it has been changed.
+    // We dont want the user to be able to update their info if they haven't changed anything.
+    useEffect(() => {
+        if (inputs) {
+            isEqual(localData, inputs) ? setAllowSubmit(false) : setAllowSubmit(true);
+        }
+    }, [inputs])
+
+
+    useEffect(() => {
+        if (updateSuccess) {
+            setTimeout(() => {
+                setUpdateSuccess(null);
+            }, 3000)
+        }
+    }, [updateSuccess])
+
+
+    // Get user data from DB using JWT
     useEffect(() => {
         if (data) {
             const config = { headers: { Authorization: `Bearer ${data.accessToken}` } }
@@ -32,17 +63,33 @@ function Profile() {
                         console.error(e.response.status);
                         console.error(e.response.headers);
                     }
-                    else if (error.request) {
-                        console.error(error.request);
+                    else if (e.request) {
+                        console.error(e.request);
                     }
                     else {
                         console.error('Error', e.message);
                     }
-                    console.error(e.config);
+                    router.push('/login');
                 });
         }
 
     }, [data])
+
+
+    async function handleDataUpdate() {
+        const res = updateUser(inputs)
+        if (res) {
+            console.log(res);
+            setUpdateSuccess(true);
+            setAllowSubmit(false);
+            setLocalData({ ...inputs });
+        }
+        else {
+            console.error(e);
+            setUpdateSuccess(false);
+            setAllowSubmit(false);
+        }
+    }
 
 
     if (hasCookie('user_data')) {
@@ -52,60 +99,52 @@ function Profile() {
                     <Head>
                         <title>Profile | Cali Ave.</title>
                     </Head>
-                    <div className='py-14 px-52 w-full h-full flex'>
-                        <InfoPanel
-                            itemNames={[
-                                {
-                                    name: 'Overview',
-                                    link: '/profile'
-                                },
-                                {
-                                    name: 'Saved Listings',
-                                    link: '/profile/listings',
-                                },
-                                {
-                                    name: 'Manage Account',
-                                    link: '/profile/manage'
-                                }
-                            ]}
-                        />
-                        <div className='flex flex-col items-center w-3/4 bg-gray-100 p-10 rounded-e-lg'>
+                    <div className='py-14 px-52 w-3/4 h-full flex-col items-center m-14 rounded-xl bg-gray-100'>
+                        <div className='flex flex-col items-center w-full my-10 rounded-e-lg'>
                             <h1 className='font-bold text-3xl mb-10'>Welcome Back, {data.name.split(' ')[0]}!</h1>
-                            <h2 className='font-bold text-2xl underline underline-offset-4'>Overview</h2>
+                        </div>
 
-                            <div className='w-full h-full flex flex-col'>
-                                <div className='w-full h-1/4 flex justify-center'>
-                                    <Swiper
-                                        modules={[Navigation]}
-                                        slidesPerView={1}
-                                        navigation
-                                        centeredSlides={true}
-                                        style={{
-                                            '--swiper-navigation-size': '24px',
-                                            '--swiper-navigation-sides-offset': '0px',
-                                            '--swiper-navigation-color': '#000000'
-                                        }}
-                                    >
-                                        <SwiperSlide className='flex justify-center items-center'>
-                                            <div className='flex flex-col items-center h-4/5 drop-shadow-xl lg:flex-row xl:flex-row 2xl:flex-row'>
-                                                test
-                                            </div>
-                                        </SwiperSlide>
-                                        <SwiperSlide className='flex justify-center items-center'>
-                                            <div className='flex flex-col items-center w-2/3 h-4/5 drop-shadow-xl lg:flex-row xl:flex-row 2xl:flex-row'>
-                                                test
-                                            </div>
-                                        </SwiperSlide>
-                                        <SwiperSlide className='flex justify-center items-center'>
-                                            <div className='flex flex-col items-center w-2/3 h-4/5 drop-shadow-xl lg:flex-row xl:flex-row 2xl:flex-row'>
-                                                test
-                                            </div>
-                                        </SwiperSlide>
-                                    </Swiper>
-                                </div>
-
+                        <div className='flex flex-col w-full items-center'>
+                            <h3 className='text-lg underline font-bold mb-5'>Your Saved Listings</h3>
+                            <div className='max-w-screen-lg flex flex-col items-center mb-20'>
+                                <SavedListings savedListings={[]} />
                             </div>
                         </div>
+
+
+                        <div className='p-20 flex flex-col items-center'>
+                            <h3 className='text-lg underline font-bold mb-10'>Account Details</h3>
+                            <div className='flex flex-col w-full items-center'>
+                                <div className='w-1/2 flex flex-col'>
+                                    <TextInput labelClassic edit disabled
+                                        label_text={'Name'}
+                                        name={'name'}
+                                        useParentInput={[inputs, setInputs]}
+                                    />
+                                    <TextInput labelClassic edit disabled
+                                        label_text={'Email'}
+                                        name={'email'}
+                                        useParentInput={[inputs, setInputs]}
+                                    />
+                                    <TextInput labelClassic edit disabled
+                                        label_text={'Zip Code'}
+                                        name={'zip_code'}
+                                        useParentInput={[inputs, setInputs]}
+                                    />
+                                    <div className='flex justify-between items-center'>
+                                        <div className={`flex transition-opacity ${updateSuccess ? 'opacity-100' : 'opacity-0'}`}>
+                                            <h1 className={`text-green-600 font-bold text-lg mr-2 `}>Update Successful!</h1>
+                                            <span className="material-symbols-outlined text-green-600 text-xl">
+                                                check_circle
+                                            </span>
+                                        </div>
+                                        <input type="button" value="Update" disabled={!allowSubmit} className={`self-end text-white rounded-xl h-12 text-lg py-2 px-4 ${!allowSubmit ? 'bg-gray-500 cursor-default' : 'bg-blue-500'} cursor-pointer`} onClick={() => { handleDataUpdate() }} />
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </>
             )

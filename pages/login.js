@@ -68,8 +68,8 @@ function LoginForm() {
 
     return (
         <form method='post' className='flex flex-col w-full max-w-screen-sm' onSubmit={(e) => sendLoginData(e)}>
-            <TextInput type={'email'} name={'email_address'} label={true} label_text={'Email Address'} useInput={[inputs, setInputs]} />
-            <TextInput type={'password'} name={'password'} label={true} label_text={'Password'} useInput={[inputs, setInputs]} />
+            <TextInput type={'email'} name={'email_address'} label={true} label_text={'Email Address'} useParentInput={[inputs, setInputs]} />
+            <TextInput type={'password'} name={'password'} label={true} label_text={'Password'} useParentInput={[inputs, setInputs]} />
 
             <div className='flex justify-between'>
                 <div className={`flex items-center ${loginError ? '' : 'invisible'}`}>

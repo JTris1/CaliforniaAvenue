@@ -18,7 +18,7 @@ function AccountPane({ setAccPaneOpen }) {
     }, [setUserData])
 
     return (
-        <div className='w-[325px] h-[400px] absolute right-0 flex flex-col justify-between items-end bg-blue-300 text-white p-7 drop-shadow-xl rounded-bl-md'
+        <div className='w-[325px] h-[400px] absolute right-0 flex flex-col justify-between items-end bg-blue-300 text-white p-7 drop-shadow-xl rounded-bl-md z-[1000]'
             onMouseOver={() => setAccPaneOpen(true)}
             onMouseLeave={() => setAccPaneOpen(false)}
         >

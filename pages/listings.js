@@ -16,14 +16,30 @@ function Listings() {
 
     useEffect(() => {
         async function getListings() {
-            const req = (await axios.get(`https://vishalhelloworld-375613.ue.r.appspot.com/propertyEnquiry?zip_code=${zipcode}`));
+            const req = axios.get(`${process.env.NEXT_PUBLIC_API_URL}/propertyEnquiry?zip_code=${zipcode}`)
+                .then((req) => {
+                    setListings(req.data);
+                })
+                .catch((error) => {
+                    if (error.response) {
+                        console.log(error.response.data);
+                        console.log(error.response.status);
+                        console.log(error.response.headers);
+                    } else if (error.request) {
+                        console.log(error.request);
+                    } else {
+                        console.log('Error', error.message);
+                    }
+                    console.log(error.config);
+                    setListings(null);
+                })
             setListings(req.data);
         }
-        getListings();
+        if (zipcode !== undefined) getListings();
     }, [zipcode])
 
     useEffect(() => {
-        if (listings !== null) {
+        if (listings) {
             const objs = listings.map((l) => {
                 return (
                     <ListItem
