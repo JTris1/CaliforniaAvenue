@@ -51,7 +51,7 @@ export default function Home() {
             {searchStatus === "BAD_ZIP_CODE" ?
               (
                 <div className='flex items-center mt-5'>
-                  <span className='material-symbols-outlined text-3xl text-red-500 rounded-full mr-4'>error</span>
+                  <span className='material-symbols-outlined text-3xl'>error</span>
                   <p className='w-full text-red-500 font-bold'>Not a valid Zip Code</p>
                 </div>
               )
