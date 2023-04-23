@@ -126,7 +126,7 @@ function Listings() {
         }
 
         setBounds();
-    }, [bounds])
+    }, [bounds, map])
 
     //// END GOOGLE MAP
 
