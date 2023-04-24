@@ -30,8 +30,8 @@ function AccountPane({ setAccPaneOpen }) {
                             <h1 className='font-extrabold text-2xl li-anim-white underline-offset-4 mb-5 text-right'>{userData.name}</h1>
                         </Link>
                         <ul className='text-right'>
-                            <Link href={'/profile/listings'}><li className='font-bold text-xl py-1 cursor-pointer li-anim-white'>Saved Listings</li></Link>
-                            <Link href={'/profile/manage'}><li className='font-bold text-xl py-1 cursor-pointer li-anim-white'>Account Settings</li></Link>
+                            <Link href={'/profile'}><li className='font-bold text-xl py-1 cursor-pointer li-anim-white'>Saved Listings</li></Link>
+                            <Link href={'/profile'}><li className='font-bold text-xl py-1 cursor-pointer li-anim-white'>Account Settings</li></Link>
                         </ul>
                     </div>
                     <h1 className='font-extrabold text-2xl cursor-pointer li-anim-white' onClick={() => logout()}>Logout</h1>

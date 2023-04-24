@@ -9,24 +9,11 @@ import axios from 'axios';
 function Carousel({ slideCount }) {
     const [slides, setSlides] = useState([]);
 
-    // useEffect(() => {
-    //     async function getProperties() {
-    //         const limit = slideCount;
-    //         const properties = await axios.get(`https://vishalhelloworld-375613.ue.r.appspot.com/propertyEnquiry?zip_code=90210&limit=${limit}`);
-    //         console.log(properties.data);
-
-    //         properties.data.map((property) => {
-    //             setSlides(() => [...slides, (
-    //                 <SwiperSlide key={property.latitude + property.longitude} style={{ display: 'flex' }} className='justify-center items-center'>
-    //                     <CarouselItem imgSrc={'/example-house.jpg'} price={250000} city={'Indianapolis'} state={'IN'} bedrooms={3} baths={2} />
-    //                 </SwiperSlide>
-    //             )]);
-    //         });
-
-    //     }
-    //     getProperties();
-
-    // }, [slideCount])
+    useEffect(() => {
+        async function getRandomProperties() {
+            axios.get(`${process.env.NEXT_PUBLIC_API_URL}/`)
+        }
+    })
 
     return (
         <>
