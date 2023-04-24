@@ -1,7 +1,6 @@
 import axios from 'axios';
 import Head from 'next/head'
 import { useRouter } from 'next/router';
-import Script from 'next/script';
 import React, { useEffect, useState } from 'react'
 import TextInput from '~/components/TextInput'
 import useLogin from '~/hooks/useLogin';
@@ -23,10 +22,12 @@ function Register() {
     async function handleSubmit(e) {
         e.preventDefault();
 
+
         console.log(inputs);
 
         axios.post(process.env.NEXT_PUBLIC_API_URL + '/users/register', inputs)
             .then(async (res) => {
+                console.log(res.status);
                 if (res.status === 201) {
                     // LOGIN
                     login({ 'email': inputs.email_address, 'password': inputs.password }).then((res) => {
@@ -38,13 +39,14 @@ function Register() {
                             console.log('Couldn\'t login');
                         }
                     })
-
-                    // REDIRECT TO USER PAGE
-                    // router.push('/profile');
+                }
+                else if (res.status === 409) {
+                    console.log('That email already exisits');
+                    setLoginSuccess(false);
                 }
             })
             .catch((e) => {
-                console.error(e);
+                console.log(e);
             });
     }
 
