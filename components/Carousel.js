@@ -22,7 +22,7 @@ function Carousel({ slideCount }) {
     if (properties.length > 0) {
         return (
             <>
-                <div className='bg-white w-full h-96 mt-32 rounded-2xl flex justify-center'>
+                <div className='bg-opacity-0 w-full h-96 mt-32 rounded-2xl flex justify-center'>
                     <Swiper
                         modules={[Navigation, Autoplay]}
                         slidesPerView={1}
