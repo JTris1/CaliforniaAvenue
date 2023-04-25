@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import useUserData from '~/hooks/useUserData';
 
-function ZipCodeSearch({ setSearchInput }) {
+function ZipCodeSearch({ searchInput, setSearchInput }) {
     const [codes] = useState(['90706', '93905', '92056', '91801', '90210', '91766', '90034', '92083', '95112']);
     const [placeholder, setPlaceholder] = useState('');
     const [currentCode, setCurrentCode] = useState(generateCode());
-    const [data] = useUserData();
 
     function generateCode() {
         return codes[Math.floor(Math.random() * codes.length)];
@@ -18,7 +17,7 @@ function ZipCodeSearch({ setSearchInput }) {
             type="text" name="zipcode"
             placeholder={currentCode}
             onInput={(e) => setSearchInput(e.target.value)}
-            value={data ? data.zip_code : undefined}
+            value={searchInput}
         />
     )
 }

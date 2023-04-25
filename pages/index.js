@@ -4,11 +4,13 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Carousel from '~/components/Carousel';
 import ZipCodeSearch from '~/components/ZipCodeSearch';
+import useUserData from '~/hooks/useUserData';
 
 const lato = Lato({ weight: ['400', '700', '900'], subsets: ['latin'] });
 
 export default function Home() {
-  const [searchInput, setSearchInput] = useState(null);
+  const [data] = useUserData();
+  const [searchInput, setSearchInput] = useState(undefined);
   const [searchStatus, setSearchStatus] = useState(null);
   const router = useRouter();
 
@@ -28,6 +30,13 @@ export default function Home() {
     }
   }
 
+  useEffect(() => {
+    if (data) {
+      console.log(data);
+      setSearchInput(data.zip_code);
+    }
+  }, [data])
+
   return (
     <>
       <Head>
@@ -44,7 +53,7 @@ export default function Home() {
               onSubmit={(e) => sumbitZipCode(e)}
             >
               <div className='flex justify-center items-center w-full'>
-                <ZipCodeSearch setSearchInput={setSearchInput} />
+                <ZipCodeSearch searchInput={searchInput} setSearchInput={setSearchInput} />
                 <button className='bg-blue-500 rounded-full w-10 h-10 -ml-14 text-white font-black' onClick={() => sumbitZipCode()}>
                   <span className="material-symbols-outlined text-3xl">arrow_forward</span>
                 </button>
