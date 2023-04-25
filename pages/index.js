@@ -35,9 +35,9 @@ export default function Home() {
       </Head>
       <main className={`flex flex-col sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl items-center p-16 ${lato.className}`}>
         <div className='p-14 w-full h-full rounded-xl bg-gray-100 flex flex-col items-center'>
-          <div className='flex flex-col items-center my-20'>
-            <h1 className='font-bold text-5xl mb-3'>Ready to find your dream property?</h1>
-            <h1 className='font-bold text-5xl'>Start by entering your Zip Code below.</h1>
+          <div className='flex flex-col items-center text-center my-20'>
+            <h1 className='font-bold text-5xl mb-8'>Ready to find your dream property?</h1>
+            <h1 className='font-bold text-4xl'>Start by entering your Zip Code below.</h1>
           </div>
           <div className='flex flex-col justify-center items-center w-2/5'>
             <form action="" method="get" className='w-full flex justify-center flex-col'
