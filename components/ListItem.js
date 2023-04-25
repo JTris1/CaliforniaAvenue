@@ -13,14 +13,14 @@ function ListItem({ price, latlng, bedrooms, bathrooms, floor_size_sq_ft, descri
             <div className='relative w-1/3'>
                 <Image src="/example-house.jpg" alt='Home Image' fill={true} sizes="450px" className='object-cover rounded-s-xl z-50' />
             </div>
-            <div className='w-2/3 flex justify-evenly px-2 py-3 relative'>
+            <div className='w-fit flex justify-evenly px-2 py-3 relative'>
                 <Column>
                     {/* Col 1 */}
-                    <span className='self-start'>
+                    <span className=''>
                         <h1 className='font-bold text-3xl'>{USD.format(price)}</h1>
                         <p className='font-medium text-lg'>{locality}</p>
                     </span>
-                    <div className='flex justify-between w-full'>
+                    <div className='flex justify-between w-fit md:flex-col md:m-5'>
                         <span className='inline-flex items-center' >
                             <span className="material-symbols-outlined text-2xl mx-2">bed</span>
                             <p className='text-xl font-bold'>{bedrooms}</p>
@@ -37,7 +37,7 @@ function ListItem({ price, latlng, bedrooms, bathrooms, floor_size_sq_ft, descri
                 </Column>
                 <Column>
                     {/* Col 2 */}
-                    <div className='overflow-hidden max-h-full'>
+                    <div className='overflow-hidden max-h-full md:my-5 mx-10'>
                         <p className='[display:-webkit-box] [-webkit-box-orient:vertical] overflow-ellipsis overflow-hidden [line-clamp:2] clamp'>{description}</p>
                     </div>
 
@@ -56,8 +56,8 @@ function Column({ children, style }) {
 
 
     return (
-        <div className='w-1/3 flex listings-content-section'>
-            <div className='flex flex-col items-center justify-between w-full before:absolute before:content-[""] before:bg-white before:bg-opacity-70 before:w-0.5 before:h-[90%] before:top-0 before:bottom-0 before:my-auto before:-left-12' style={style}>
+        <div className='w-1/3 md:w-1/2 md:p-2 flex listings-content-section'>
+            <div className='flex flex-col items-center justify-between w-full md:flex-row before:absolute before:content-[""] before:bg-white before:bg-opacity-70 before:w-0.5 before:h-[90%] before:top-0 before:bottom-0 before:my-auto before:-left-1' style={style}>
                 {children}
             </div>
         </div>
