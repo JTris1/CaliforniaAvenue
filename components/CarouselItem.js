@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
+import Bed from './icons/Bed';
+import Bathtub from './icons/Bathtub';
 
 function CarouselItem({ imgSrc, price, city, state, bedrooms, baths }) {
     let USD = new Intl.NumberFormat('en-US', {
@@ -20,11 +22,12 @@ function CarouselItem({ imgSrc, price, city, state, bedrooms, baths }) {
                 </div>
                 <div className='text-center text-white flex justify-evenly w-full'>
                     <span className='inline-flex items-center'>
-                        <span className="material-symbols-outlined text-5xl mx-5">bed</span>
+                        {/* <span className="material-symbols-outlined text-5xl mx-5">bed</span> */}
+                        <Bed className={'w-[48px] h-[48px] mx-5 flex justify-center items-center fill-white'} />
                         <p className='text-3xl font-bold'>{bedrooms}</p>
                     </span>
                     <span className='inline-flex items-center'>
-                        <span className="material-symbols-outlined text-5xl mx-5">bathtub</span>
+                        <Bathtub className={'w-[48px] h-[48px] mx-5 flex justify-center items-center fill-white'} />
                         <p className='text-3xl font-bold'>{baths}</p>
                     </span>
                 </div>

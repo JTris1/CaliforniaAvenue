@@ -4,6 +4,8 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Carousel from '~/components/Carousel';
 import ZipCodeSearch from '~/components/ZipCodeSearch';
+import ArrowForward from '~/components/icons/Arrow_Forward';
+import Error from '~/components/icons/Error';
 import useUserData from '~/hooks/useUserData';
 
 const lato = Lato({ weight: ['400', '700', '900'], subsets: ['latin'] });
@@ -53,14 +55,14 @@ export default function Home() {
             >
               <div className='flex justify-center items-center w-full'>
                 <ZipCodeSearch searchInput={searchInput} setSearchInput={setSearchInput} />
-                <button className='bg-blue-500 rounded-full w-10 h-10 -ml-14 text-white font-black' onClick={() => sumbitZipCode()}>
-                  <span className="material-symbols-outlined text-3xl">arrow_forward</span>
+                <button className='bg-blue-500 rounded-full w-10 h-10 -ml-14 text-white font-black flex items-center justify-center' onClick={() => sumbitZipCode()}>
+                  <ArrowForward className={'w-8 fill-white'} />
                 </button>
               </div>
               {searchStatus === "BAD_ZIP_CODE" ?
                 (
                   <div className='flex items-center mt-5'>
-                    <span className='material-symbols-outlined text-3xl'>error</span>
+                    <Error className={'fill-red-500 w-7 mr-2'} />
                     <p className='w-full text-red-500 font-bold'>Not a valid Zip Code</p>
                   </div>
                 )

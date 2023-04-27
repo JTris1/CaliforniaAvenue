@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import TextInput from '~/components/TextInput'
+import CheckCircle from '~/components/icons/Check_Circle';
 import useLogin from '~/hooks/useLogin';
 
 function Register() {
@@ -82,11 +83,9 @@ function Register() {
                                 <span className="material-symbols-outlined text-4xl absolute right-5 top-5 cursor-pointer" onClick={() => setLoginSuccess(false)}>
                                     close
                                 </span>
-                                <div className='flex'>
+                                <div className='flex items-center'>
                                     <h1 className='text-white font-bold text-3xl mr-8'>Registration Successful!</h1>
-                                    <span className="material-symbols-outlined text-5xl">
-                                        check_circle
-                                    </span>
+                                    <CheckCircle className={'fill-white w-12 h-12'} />
                                 </div>
                                 <span>Automatically redirecting to your account page in 3 seconds...</span>
                             </div>

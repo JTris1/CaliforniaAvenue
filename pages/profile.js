@@ -9,6 +9,7 @@ import SavedListings from '~/components/SavedListings';
 import TextInput from '~/components/TextInput';
 import { isEqual } from 'lodash-es';
 import useUpdateUser from '~/hooks/useUpdateUser';
+import CheckCircle from '~/components/icons/Check_Circle';
 
 
 // TODO: Dynamically pull in saved listings from user data
@@ -132,11 +133,9 @@ function Profile() {
                                         useParentInput={[inputs, setInputs]}
                                     />
                                     <div className='flex justify-between items-center'>
-                                        <div className={`flex transition-opacity ${updateSuccess ? 'opacity-100' : 'opacity-0'}`}>
+                                        <div className={`flex transition-opacity ${updateSuccess ? 'opacity-100' : 'opacity-0'} flex items-center`}>
                                             <h1 className={`text-green-600 font-bold text-lg mr-2 `}>Update Successful!</h1>
-                                            <span className="material-symbols-outlined text-green-600 text-xl">
-                                                check_circle
-                                            </span>
+                                            <CheckCircle className={'fill-green-600 w-6 h-6'} />
                                         </div>
                                         <input type="button" value="Update" disabled={!allowSubmit} className={`self-end text-white rounded-xl h-12 text-lg py-2 px-4 ${!allowSubmit ? 'bg-gray-500 cursor-default' : 'bg-blue-500'} cursor-pointer`} onClick={() => { handleDataUpdate() }} />
                                     </div>

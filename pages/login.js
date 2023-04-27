@@ -5,6 +5,7 @@ import axios from 'axios'
 import useUserData from '~/hooks/useUserData'
 import { getCookie } from 'cookies-next';
 import { useRouter } from 'next/router'
+import Error from '~/components/icons/Error'
 
 function Login() {
 
@@ -73,7 +74,7 @@ function LoginForm() {
 
             <div className='flex justify-between'>
                 <div className={`flex items-center ${loginError ? '' : 'invisible'}`}>
-                    <span className={`material-symbols-outlined text-3xl text-red-500 rounded-full mr-4`}>error</span>
+                    <Error className={'fill-red-500 w-6 mr-2'} />
                     <p className='text-red-500 text-sm font-bold'>Not a valid email or password. Please try again.</p>
                 </div>
 
