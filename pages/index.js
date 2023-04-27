@@ -32,7 +32,6 @@ export default function Home() {
 
   useEffect(() => {
     if (data) {
-      console.log(data);
       setSearchInput(data.zip_code);
     }
   }, [data])
@@ -74,6 +73,5 @@ export default function Home() {
         </div>
       </main>
     </>
-
   )
 }
