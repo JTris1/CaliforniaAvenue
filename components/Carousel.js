@@ -44,7 +44,7 @@ function Carousel({ slideCount }) {
                     >
                         {properties.map((i) => (
                             <SwiperSlide key={i.latitude + i.longitude} style={{ display: 'flex' }} className='justify-center items-center'>
-                                <CarouselItem imgSrc={'/example-house.jpg'} price={i.price} city={i.locality} state={i.region} bedrooms={i.bedrooms} baths={i.bathrooms} />
+                                <CarouselItem imgSrc={'example-house.jpg'} price={i.price} city={i.locality} state={i.region} bedrooms={i.bedrooms} baths={i.bathrooms} />
                             </SwiperSlide>)
                         )}
                     </Swiper>

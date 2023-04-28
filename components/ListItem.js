@@ -11,7 +11,7 @@ function ListItem({ price, latlng, bedrooms, bathrooms, floor_size_sq_ft, descri
     return (
         <div className='h-40 bg-blue-500 text-white my-5 rounded-xl flex'>
             <div className='relative w-1/3'>
-                <Image src="/example-house.jpg" alt='Home Image' fill={true} sizes="450px" className='object-cover rounded-s-xl z-50' />
+                <Image src="example-house.jpg" alt='Home Image' fill={true} sizes="450px" className='object-cover rounded-s-xl z-50' />
             </div>
             <div className='w-fit flex justify-evenly px-2 py-3 relative'>
                 <Column>
