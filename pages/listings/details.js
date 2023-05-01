@@ -120,13 +120,13 @@ function Details() {
                                     >
 
                                         <SwiperSlide style={{ display: 'flex' }} className='justify-center items-center'>
-                                            <Image src={'/example-house.jpg'} alt={`House at ${listing.address}`} width={500} height={333} className='rounded-lg' />
+                                            <Image src={'example-house.jpg'} alt={`House at ${listing.address}`} width={500} height={333} className='rounded-lg' />
                                         </SwiperSlide>
                                         <SwiperSlide style={{ display: 'flex' }} className='justify-center items-center'>
-                                            <Image src={'/example-house.jpg'} alt={`House at ${listing.address}`} width={500} height={333} className='rounded-lg' />
+                                            <Image src={'example-house.jpg'} alt={`House at ${listing.address}`} width={500} height={333} className='rounded-lg' />
                                         </SwiperSlide>
                                         <SwiperSlide style={{ display: 'flex' }} className='justify-center items-center'>
-                                            <Image src={'/example-house.jpg'} alt={`House at ${listing.address}`} width={500} height={333} className='rounded-lg' />
+                                            <Image src={'example-house.jpg'} alt={`House at ${listing.address}`} width={500} height={333} className='rounded-lg' />
                                         </SwiperSlide>
                                     </Swiper>
                                 </div>
