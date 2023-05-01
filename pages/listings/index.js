@@ -53,6 +53,7 @@ function Listings() {
                 return (
                     <ListItem
                         key={l.latitude + l.longitude}
+                        id={l.uniq_id}
                         price={l.price}
                         bedrooms={l.bedrooms}
                         bathrooms={l.bathrooms}

@@ -43,7 +43,7 @@ function ListingItem({ price, city, state, address, beds, baths }) {
         <div className='flex flex-col items-center justify-center px-20 h-full lg:flex-row xl:flex-row 2xl:flex-row'>
             <div className='w-full h-4/5 bg-blue-300 flex items-center text-white rounded-lg'>
                 <div className='w-2/5 h-full relative'>
-                    <Image src={'/example-house.jpg'} alt={`House at ${address}`} fill={true} sizes="450px" className='object-cover rounded-s-xl' />
+                    <Image src={'example-house.jpg'} alt={`House at ${address}`} fill={true} sizes="450px" className='object-cover rounded-s-xl' />
                 </div>
                 <div className='flex w-3/5 h-full p-5'>
                     <div className='w-4/5 h-full flex flex-col items-center justify-between'>
